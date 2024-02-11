@@ -1,4 +1,4 @@
-package golangutils
+package goutils
 
 import "os"
 
