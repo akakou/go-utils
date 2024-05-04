@@ -16,7 +16,7 @@ const (
 	POST
 )
 
-func (er EchoRoute[T]) Set(e *echo.Echo, param *T) {
+func (er EchoRoute[T]) Set(e *echo.Group, param *T) {
 	if er.Method == ANY {
 		e.Any(er.Path, er.F(param))
 	}
