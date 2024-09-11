@@ -63,7 +63,7 @@ func OpenIntFile(path string) (*File[int], error) {
 	return OpenFile(path, marshal, unmarshal)
 }
 
-func (f File[T]) Store(data *T) error {
+func (f *File[T]) Store(data *T) error {
 	res, err := f.FileMarshal(data)
 	if err != nil {
 		return err
@@ -78,7 +78,7 @@ func (f File[T]) Store(data *T) error {
 
 }
 
-func (f File[T]) Restore() (*T, error) {
+func (f *File[T]) Restore() (*T, error) {
 	buf, err := io.ReadAll(f.File)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (f File[T]) Restore() (*T, error) {
 	return res, nil
 }
 
-func (f File[T]) Close() error {
+func (f *File[T]) Close() error {
 	err := f.File.Close()
 	if err != nil {
 		return err
