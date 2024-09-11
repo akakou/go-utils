@@ -16,7 +16,7 @@ type File[T any] struct {
 }
 
 func OpenFile[T any](path string, marshal FileMarshal[T], unmarshal FileUnmarshal[T]) (*File[T], error) {
-	f, err := os.Open(path)
+	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		return nil, err
 	}
