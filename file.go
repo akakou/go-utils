@@ -74,6 +74,11 @@ func (f *File[T]) Store(data *T) error {
 		return err
 	}
 
+	_, err = f.Seek(0, 0)
+	if err != nil {
+		return err
+	}
+
 	return err
 
 }
@@ -87,6 +92,11 @@ func (f *File[T]) Restore() (*T, error) {
 	res, err := f.FileUnmarshal(buf)
 	if err != nil {
 		return nil, err
+	}
+
+	_, err = f.Seek(0, 0)
+	if err != nil {
+		return res, err
 	}
 
 	return res, nil
